@@ -1,0 +1,31 @@
+name: CI
+
+# Validates the extension on every push and pull request to main:
+# the manifest must be valid and the VSIX must build cleanly.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Verify manifest and build VSIX
+        run: npx --yes @vscode/vsce package --out pin-and-hide.vsix
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vsix
+          path: pin-and-hide.vsix
+          if-no-files-found: error
