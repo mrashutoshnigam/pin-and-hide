@@ -1,4 +1,4 @@
-# Auto Hide Panels
+# Pin & Hide
 
 Visual Studio-style **pin / unpin auto-hide** for VS Code's Primary Side Bar, Panel and Secondary Side Bar.
 
@@ -6,8 +6,8 @@ Visual Studio-style **pin / unpin auto-hide** for VS Code's Primary Side Bar, Pa
 
 - Each view's title bar has a pin button, like Visual Studio's tool windows: `$(pinned)` means pinned (always visible) and `$(pin)` means unpinned (auto-hides). Click it to toggle that part.
 - The status bar shows one small pin icon: `$(pinned)` when everything is pinned, or `$(pin) N` when N parts auto-hide. Click it to open a multi-select list and tick the parts to keep pinned (unticked parts auto-hide). It also works while a part is hidden.
-- You can also run **Auto Hide: Choose Pinned Parts…** from the Command Palette.
-- You can also run **Auto Hide: Toggle Pin: …** from the Command Palette.
+- You can also run **Pin & Hide: Choose Pinned Parts…** from the Command Palette.
+- You can also run **Pin & Hide: Toggle Pin: …** from the Command Palette.
 - Unpinning a part collapses it straight away, after `autoHide.delay` ms (default `300`).
 - An unpinned part also hides `autoHide.delay` ms after you click, type or scroll in the editor. The timer starts on the first interaction; continued activity does not postpone it.
 - Switching to the terminal hides the unpinned side bars but leaves the Panel open, since the terminal lives there.

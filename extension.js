@@ -37,7 +37,7 @@ function activate(context) {
   const renderItem = () => {
     const unpinned = PARTS.filter((p) => !isPinned(p));
     item.text = unpinned.length ? `$(pin) ${unpinned.length}` : '$(pinned)';
-    item.tooltip = `Auto Hide: ${PARTS.map((p) => `${p.label} ${isPinned(p) ? 'pinned' : 'auto-hidden'}`).join(', ')}. Click to choose.`;
+    item.tooltip = `Pin & Hide: ${PARTS.map((p) => `${p.label} ${isPinned(p) ? 'pinned' : 'auto-hidden'}`).join(', ')}. Click to choose.`;
   };
   item.show();
 
@@ -66,7 +66,7 @@ function activate(context) {
     vscode.commands.registerCommand('autoHide.choosePinned', async () => {
       const picked = await vscode.window.showQuickPick(
         PARTS.map((p) => ({ label: p.label, part: p, picked: isPinned(p) })),
-        { canPickMany: true, title: 'Auto Hide', placeHolder: 'Checked parts stay pinned; unchecked parts auto-hide' }
+        { canPickMany: true, title: 'Pin & Hide', placeHolder: 'Checked parts stay pinned; unchecked parts auto-hide' }
       );
       if (!picked) return;
       for (const p of PARTS) {

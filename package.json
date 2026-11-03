@@ -1,6 +1,6 @@
 {
-  "name": "auto-hide-panels",
-  "displayName": "Auto Hide Panels",
+  "name": "pin-and-hide",
+  "displayName": "Pin & Hide",
   "description": "Visual Studio-style pin/unpin auto-hide for the Side Bar, Panel and Secondary Side Bar.",
   "version": "0.1.0",
   "publisher": "ashutosh-nigam",
@@ -20,62 +20,62 @@
       {
         "command": "autoHide.choosePinned",
         "title": "Choose Pinned Parts…",
-        "category": "Auto Hide"
+        "category": "Pin & Hide"
       },
       {
         "command": "autoHide.toggleSidebar",
         "title": "Toggle Pin: Primary Side Bar",
-        "category": "Auto Hide"
+        "category": "Pin & Hide"
       },
       {
         "command": "autoHide.togglePanel",
         "title": "Toggle Pin: Panel",
-        "category": "Auto Hide"
+        "category": "Pin & Hide"
       },
       {
         "command": "autoHide.toggleAux",
         "title": "Toggle Pin: Secondary Side Bar",
-        "category": "Auto Hide"
+        "category": "Pin & Hide"
       },
       {
         "command": "autoHide.unpinSidebar",
-        "title": "Unpin Primary Side Bar (Auto Hide)",
-        "category": "Auto Hide",
+        "title": "Unpin Primary Side Bar",
+        "category": "Pin & Hide",
         "icon": "$(pinned)"
       },
       {
         "command": "autoHide.pinSidebar",
         "title": "Pin Primary Side Bar",
-        "category": "Auto Hide",
+        "category": "Pin & Hide",
         "icon": "$(pin)"
       },
       {
         "command": "autoHide.unpinPanel",
-        "title": "Unpin Panel (Auto Hide)",
-        "category": "Auto Hide",
+        "title": "Unpin Panel",
+        "category": "Pin & Hide",
         "icon": "$(pinned)"
       },
       {
         "command": "autoHide.pinPanel",
         "title": "Pin Panel",
-        "category": "Auto Hide",
+        "category": "Pin & Hide",
         "icon": "$(pin)"
       },
       {
         "command": "autoHide.unpinAux",
-        "title": "Unpin Secondary Side Bar (Auto Hide)",
-        "category": "Auto Hide",
+        "title": "Unpin Secondary Side Bar",
+        "category": "Pin & Hide",
         "icon": "$(pinned)"
       },
       {
         "command": "autoHide.pinAux",
         "title": "Pin Secondary Side Bar",
-        "category": "Auto Hide",
+        "category": "Pin & Hide",
         "icon": "$(pin)"
       }
     ],
     "configuration": {
-      "title": "Auto Hide",
+      "title": "Pin & Hide",
       "properties": {
         "autoHide.delay": {
           "type": "number",
@@ -148,6 +148,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://example.com/auto-hide-panels.git"
-  }
+    "url": "https://example.com/pin-and-hide.git"
+  },
+  "icon": "images/icon.png"
 }
