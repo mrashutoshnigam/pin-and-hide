@@ -38,9 +38,9 @@
       "properties": {
         "autoHide.delay": {
           "type": "number",
-          "default": 1000,
+          "default": 300,
           "minimum": 0,
-          "description": "Milliseconds to wait after editor activity before hiding unpinned parts."
+          "description": "Milliseconds to wait after the first editor click/keystroke/scroll before hiding unpinned parts."
         }
       }
     }

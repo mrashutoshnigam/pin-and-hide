@@ -7,14 +7,29 @@ const PARTS = [
 ];
 
 let timer;
+const pending = new Set();
 
 function cancelHide() {
   clearTimeout(timer);
   timer = undefined;
+  pending.clear();
 }
 
 function activate(context) {
   const isPinned = (part) => context.globalState.get(`pinned.${part.key}`, true);
+
+  const scheduleHide = (parts = PARTS) => {
+    parts.filter((p) => !isPinned(p)).forEach((p) => pending.add(p));
+    // Don't restart a pending hide, otherwise continuous typing postpones it indefinitely.
+    if (!pending.size || timer) return;
+    const delay = Math.max(0, vscode.workspace.getConfiguration('autoHide').get('delay', 300));
+    timer = setTimeout(() => {
+      timer = undefined;
+      // Re-check pin state in case the user pinned during the delay.
+      [...pending].filter((p) => !isPinned(p)).forEach((p) => vscode.commands.executeCommand(p.close));
+      pending.clear();
+    }, delay);
+  };
 
   PARTS.forEach((part, i) => {
     const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100 - i);
@@ -32,30 +47,31 @@ function activate(context) {
       vscode.commands.registerCommand(part.toggle, async () => {
         await context.globalState.update(`pinned.${part.key}`, !isPinned(part));
         render();
+        // Like Visual Studio: unpinning collapses the part straight away (after the delay).
+        scheduleHide([part]);
       })
     );
   });
 
-  const scheduleHide = () => {
-    const unpinned = PARTS.filter((p) => !isPinned(p));
-    if (!unpinned.length) return;
-    cancelHide();
-    const delay = Math.max(0, vscode.workspace.getConfiguration('autoHide').get('delay', 1000));
-    timer = setTimeout(() => {
-      timer = undefined;
-      // Re-check pin state in case the user pinned during the delay.
-      unpinned.filter((p) => !isPinned(p)).forEach((p) => vscode.commands.executeCommand(p.close));
-    }, delay);
-  };
-
   const userKinds = [vscode.TextEditorSelectionChangeKind.Mouse, vscode.TextEditorSelectionChangeKind.Keyboard];
+  const notPanel = PARTS.filter((p) => p.key !== 'panel');
+  // Scrolls caused by Search/Explorer/Go-to navigation must not count as "user is in the editor".
+  let lastProgrammaticChange = 0;
 
   context.subscriptions.push(
     vscode.window.onDidChangeTextEditorSelection((e) => {
       if (userKinds.includes(e.kind)) scheduleHide();
+      else lastProgrammaticChange = Date.now();
     }),
-    vscode.window.onDidChangeActiveTerminal(cancelHide),
-    vscode.window.onDidChangeTerminalState(cancelHide),
+    vscode.window.onDidChangeTextEditorVisibleRanges(() => {
+      if (Date.now() - lastProgrammaticChange > 500) scheduleHide();
+    }),
+    vscode.window.onDidChangeActiveTextEditor(() => {
+      lastProgrammaticChange = Date.now();
+    }),
+    // Working in the terminal means the side bars lost focus; the panel hosting the terminal stays.
+    vscode.window.onDidChangeActiveTerminal(() => scheduleHide(notPanel)),
+    vscode.window.onDidChangeTerminalState(() => scheduleHide(notPanel)),
     vscode.window.onDidChangeWindowState((s) => {
       if (!s.focused) cancelHide();
     }),
