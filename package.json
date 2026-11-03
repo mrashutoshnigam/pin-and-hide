@@ -2,7 +2,7 @@
   "name": "pin-and-hide",
   "displayName": "Pin & Hide",
   "description": "Visual Studio-style pin/unpin auto-hide for the Side Bar, Panel and Secondary Side Bar — reclaim your editor space.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "mrashutoshnigam",
   "license": "MIT",
   "engines": {
