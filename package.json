@@ -1,9 +1,9 @@
 {
   "name": "pin-and-hide",
   "displayName": "Pin & Hide",
-  "description": "Visual Studio-style pin/unpin auto-hide for the Side Bar, Panel and Secondary Side Bar.",
+  "description": "Visual Studio-style pin/unpin auto-hide for the Side Bar, Panel and Secondary Side Bar — reclaim your editor space.",
   "version": "0.1.0",
-  "publisher": "ashutosh-nigam",
+  "publisher": "mrashutoshnigam",
   "license": "MIT",
   "engines": {
     "vscode": "^1.80.0"
@@ -11,10 +11,25 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "pin",
+    "auto-hide",
+    "sidebar",
+    "panel",
+    "layout"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
   "activationEvents": [
     "onStartupFinished"
   ],
   "main": "./extension.js",
+  "scripts": {
+    "package": "npx --yes @vscode/vsce package",
+    "publish": "npx --yes @vscode/vsce publish"
+  },
   "contributes": {
     "commands": [
       {
@@ -150,5 +165,9 @@
     "type": "git",
     "url": "https://github.com/mrashutoshnigam/pin-and-hide.git"
   },
+  "bugs": {
+    "url": "https://github.com/mrashutoshnigam/pin-and-hide/issues"
+  },
+  "homepage": "https://github.com/mrashutoshnigam/pin-and-hide#readme",
   "icon": "images/icon.png"
 }

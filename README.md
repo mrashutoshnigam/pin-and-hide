@@ -1,6 +1,8 @@
 # Pin & Hide
 
-Visual Studio-style **pin / unpin auto-hide** for VS Code's Primary Side Bar, Panel and Secondary Side Bar.
+**Pin & Hide** brings Visual Studio's pin / auto-hide behavior to VS Code. Pin the parts you want to keep, and let the rest slide away when you start editing — more code, less chrome.
+
+Works on the Primary Side Bar, Panel and Secondary Side Bar.
 
 ## Usage
 
