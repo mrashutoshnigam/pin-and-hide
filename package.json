@@ -18,6 +18,11 @@
   "contributes": {
     "commands": [
       {
+        "command": "autoHide.choosePinned",
+        "title": "Choose Pinned Parts…",
+        "category": "Auto Hide"
+      },
+      {
         "command": "autoHide.toggleSidebar",
         "title": "Toggle Pin: Primary Side Bar",
         "category": "Auto Hide"

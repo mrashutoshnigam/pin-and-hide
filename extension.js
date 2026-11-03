@@ -31,34 +31,50 @@ function activate(context) {
     }, delay);
   };
 
-  PARTS.forEach((part, i) => {
-    const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100 - i);
-    item.command = part.toggle;
-    const render = () => {
-      const pinned = isPinned(part);
-      item.text = `$(${pinned ? 'pinned' : 'pin'}) ${part.label}`;
-      item.tooltip = `${part.label} is ${pinned ? 'pinned' : 'auto-hidden'}. Click to ${pinned ? 'unpin' : 'pin'}.`;
-      // Drives which pin icon the view title bar shows (see menus in package.json).
-      vscode.commands.executeCommand('setContext', `autoHide.${part.key}Pinned`, pinned);
-    };
-    render();
-    item.show();
+  // One compact status bar icon; full state lives in its tooltip and the picker.
+  const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  item.command = 'autoHide.choosePinned';
+  const renderItem = () => {
+    const unpinned = PARTS.filter((p) => !isPinned(p));
+    item.text = unpinned.length ? `$(pin) ${unpinned.length}` : '$(pinned)';
+    item.tooltip = `Auto Hide: ${PARTS.map((p) => `${p.label} ${isPinned(p) ? 'pinned' : 'auto-hidden'}`).join(', ')}. Click to choose.`;
+  };
+  item.show();
 
-    const setPinned = async (pinned) => {
-      await context.globalState.update(`pinned.${part.key}`, pinned);
-      render();
-      // Like Visual Studio: unpinning collapses the part straight away (after the delay).
-      if (!pinned) scheduleHide([part]);
-    };
+  const setPinned = async (part, pinned) => {
+    await context.globalState.update(`pinned.${part.key}`, pinned);
+    // Drives which pin icon the view title bar shows (see menus in package.json).
+    vscode.commands.executeCommand('setContext', `autoHide.${part.key}Pinned`, pinned);
+    renderItem();
+    // Like Visual Studio: unpinning collapses the part straight away (after the delay).
+    if (!pinned) scheduleHide([part]);
+  };
+
+  PARTS.forEach((part) => {
+    vscode.commands.executeCommand('setContext', `autoHide.${part.key}Pinned`, isPinned(part));
     const suffix = part.toggle.replace('autoHide.toggle', '');
-
     context.subscriptions.push(
-      item,
-      vscode.commands.registerCommand(part.toggle, () => setPinned(!isPinned(part))),
-      vscode.commands.registerCommand(`autoHide.pin${suffix}`, () => setPinned(true)),
-      vscode.commands.registerCommand(`autoHide.unpin${suffix}`, () => setPinned(false))
+      vscode.commands.registerCommand(part.toggle, () => setPinned(part, !isPinned(part))),
+      vscode.commands.registerCommand(`autoHide.pin${suffix}`, () => setPinned(part, true)),
+      vscode.commands.registerCommand(`autoHide.unpin${suffix}`, () => setPinned(part, false))
     );
   });
+  renderItem();
+
+  context.subscriptions.push(
+    item,
+    vscode.commands.registerCommand('autoHide.choosePinned', async () => {
+      const picked = await vscode.window.showQuickPick(
+        PARTS.map((p) => ({ label: p.label, part: p, picked: isPinned(p) })),
+        { canPickMany: true, title: 'Auto Hide', placeHolder: 'Checked parts stay pinned; unchecked parts auto-hide' }
+      );
+      if (!picked) return;
+      for (const p of PARTS) {
+        const pinned = picked.some((x) => x.part === p);
+        if (pinned !== isPinned(p)) await setPinned(p, pinned);
+      }
+    })
+  );
 
   const userKinds = [vscode.TextEditorSelectionChangeKind.Mouse, vscode.TextEditorSelectionChangeKind.Keyboard];
   const notPanel = PARTS.filter((p) => p.key !== 'panel');
