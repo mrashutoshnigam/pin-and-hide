@@ -1,0 +1,52 @@
+{
+  "name": "auto-hide-panels",
+  "displayName": "Auto Hide Panels",
+  "description": "Visual Studio-style pin/unpin auto-hide for the Side Bar, Panel and Secondary Side Bar.",
+  "version": "0.1.0",
+  "publisher": "ashutosh-nigam",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "autoHide.toggleSidebar",
+        "title": "Toggle Pin: Primary Side Bar",
+        "category": "Auto Hide"
+      },
+      {
+        "command": "autoHide.togglePanel",
+        "title": "Toggle Pin: Panel",
+        "category": "Auto Hide"
+      },
+      {
+        "command": "autoHide.toggleAux",
+        "title": "Toggle Pin: Secondary Side Bar",
+        "category": "Auto Hide"
+      }
+    ],
+    "configuration": {
+      "title": "Auto Hide",
+      "properties": {
+        "autoHide.delay": {
+          "type": "number",
+          "default": 1000,
+          "minimum": 0,
+          "description": "Milliseconds to wait after editor activity before hiding unpinned parts."
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://example.com/auto-hide-panels.git"
+  }
+}
