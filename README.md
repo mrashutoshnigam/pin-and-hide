@@ -38,4 +38,4 @@ VS Code extensions cannot read the mouse cursor position or which part has keybo
 
 - Press `F5` to open an Extension Development Host running the extension from source.
 - Build an installable package locally: `npm run package` (produces a `.vsix`), then **Extensions: Install from VSIX…**.
-- Releases publish to the Marketplace automatically via GitHub Actions when a `v*` tag is pushed. See [`.github/workflows/publish.yml`](.github/workflows/publish.yml).
+- To cut a release: run the **Release** workflow from the Actions tab (or `gh workflow run release.yml -f bump=patch`). It bumps the version, tags, publishes to the Marketplace and creates a GitHub Release. See [`.github/workflows/release.yml`](.github/workflows/release.yml).
