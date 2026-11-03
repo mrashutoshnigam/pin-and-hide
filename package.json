@@ -31,6 +31,42 @@
         "command": "autoHide.toggleAux",
         "title": "Toggle Pin: Secondary Side Bar",
         "category": "Auto Hide"
+      },
+      {
+        "command": "autoHide.unpinSidebar",
+        "title": "Unpin Primary Side Bar (Auto Hide)",
+        "category": "Auto Hide",
+        "icon": "$(pinned)"
+      },
+      {
+        "command": "autoHide.pinSidebar",
+        "title": "Pin Primary Side Bar",
+        "category": "Auto Hide",
+        "icon": "$(pin)"
+      },
+      {
+        "command": "autoHide.unpinPanel",
+        "title": "Unpin Panel (Auto Hide)",
+        "category": "Auto Hide",
+        "icon": "$(pinned)"
+      },
+      {
+        "command": "autoHide.pinPanel",
+        "title": "Pin Panel",
+        "category": "Auto Hide",
+        "icon": "$(pin)"
+      },
+      {
+        "command": "autoHide.unpinAux",
+        "title": "Unpin Secondary Side Bar (Auto Hide)",
+        "category": "Auto Hide",
+        "icon": "$(pinned)"
+      },
+      {
+        "command": "autoHide.pinAux",
+        "title": "Pin Secondary Side Bar",
+        "category": "Auto Hide",
+        "icon": "$(pin)"
       }
     ],
     "configuration": {
@@ -43,6 +79,66 @@
           "description": "Milliseconds to wait after the first editor click/keystroke/scroll before hiding unpinned parts."
         }
       }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "autoHide.unpinSidebar",
+          "when": "viewLocation == sidebar && autoHide.sidebarPinned",
+          "group": "navigation@100"
+        },
+        {
+          "command": "autoHide.pinSidebar",
+          "when": "viewLocation == sidebar && !autoHide.sidebarPinned",
+          "group": "navigation@100"
+        },
+        {
+          "command": "autoHide.unpinPanel",
+          "when": "viewLocation == panel && autoHide.panelPinned",
+          "group": "navigation@100"
+        },
+        {
+          "command": "autoHide.pinPanel",
+          "when": "viewLocation == panel && !autoHide.panelPinned",
+          "group": "navigation@100"
+        },
+        {
+          "command": "autoHide.unpinAux",
+          "when": "viewLocation == auxiliarybar && autoHide.auxPinned",
+          "group": "navigation@100"
+        },
+        {
+          "command": "autoHide.pinAux",
+          "when": "viewLocation == auxiliarybar && !autoHide.auxPinned",
+          "group": "navigation@100"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "autoHide.unpinSidebar",
+          "when": "false"
+        },
+        {
+          "command": "autoHide.pinSidebar",
+          "when": "false"
+        },
+        {
+          "command": "autoHide.unpinPanel",
+          "when": "false"
+        },
+        {
+          "command": "autoHide.pinPanel",
+          "when": "false"
+        },
+        {
+          "command": "autoHide.unpinAux",
+          "when": "false"
+        },
+        {
+          "command": "autoHide.pinAux",
+          "when": "false"
+        }
+      ]
     }
   },
   "repository": {

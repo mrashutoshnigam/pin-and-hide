@@ -4,7 +4,8 @@ Visual Studio-style **pin / unpin auto-hide** for VS Code's Primary Side Bar, Pa
 
 ## Usage
 
-- Three status bar buttons show each part's state: `$(pinned)` means pinned (always visible) and `$(pin)` means unpinned (auto-hides). Click a button to toggle it.
+- Each view's title bar has a pin button, like Visual Studio's tool windows: `$(pinned)` means pinned (always visible) and `$(pin)` means unpinned (auto-hides). Click it to toggle that part.
+- The status bar also has one button per part, so you can re-pin a part even while it's hidden.
 - You can also run **Auto Hide: Toggle Pin: …** from the Command Palette.
 - Unpinning a part collapses it straight away, after `autoHide.delay` ms (default `300`).
 - An unpinned part also hides `autoHide.delay` ms after you click, type or scroll in the editor. The timer starts on the first interaction; continued activity does not postpone it.

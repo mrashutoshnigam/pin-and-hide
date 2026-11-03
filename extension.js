@@ -38,18 +38,25 @@ function activate(context) {
       const pinned = isPinned(part);
       item.text = `$(${pinned ? 'pinned' : 'pin'}) ${part.label}`;
       item.tooltip = `${part.label} is ${pinned ? 'pinned' : 'auto-hidden'}. Click to ${pinned ? 'unpin' : 'pin'}.`;
+      // Drives which pin icon the view title bar shows (see menus in package.json).
+      vscode.commands.executeCommand('setContext', `autoHide.${part.key}Pinned`, pinned);
     };
     render();
     item.show();
 
+    const setPinned = async (pinned) => {
+      await context.globalState.update(`pinned.${part.key}`, pinned);
+      render();
+      // Like Visual Studio: unpinning collapses the part straight away (after the delay).
+      if (!pinned) scheduleHide([part]);
+    };
+    const suffix = part.toggle.replace('autoHide.toggle', '');
+
     context.subscriptions.push(
       item,
-      vscode.commands.registerCommand(part.toggle, async () => {
-        await context.globalState.update(`pinned.${part.key}`, !isPinned(part));
-        render();
-        // Like Visual Studio: unpinning collapses the part straight away (after the delay).
-        scheduleHide([part]);
-      })
+      vscode.commands.registerCommand(part.toggle, () => setPinned(!isPinned(part))),
+      vscode.commands.registerCommand(`autoHide.pin${suffix}`, () => setPinned(true)),
+      vscode.commands.registerCommand(`autoHide.unpin${suffix}`, () => setPinned(false))
     );
   });
 
