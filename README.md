@@ -29,7 +29,13 @@ Works on the Primary Side Bar, Panel and Secondary Side Bar.
 
 VS Code extensions cannot read the mouse cursor position or which part has keyboard focus. Hiding is therefore triggered by editor or terminal activity, not by the cursor leaving a part. A click in the editor that doesn't move the caret (for example, on the exact spot where it already is) can't be detected.
 
-## Run / package
+## Install
 
-- Press `F5` to open an Extension Development Host.
-- To build an installable package: `npx @vscode/vsce package`, then **Extensions: Install from VSIX…**.
+- In VS Code: open **Extensions** (`Ctrl+Shift+X`), search for **Pin & Hide**, and click **Install**.
+- Or from the command line: `code --install-extension mrashutoshnigam.pin-and-hide`.
+
+## Development
+
+- Press `F5` to open an Extension Development Host running the extension from source.
+- Build an installable package locally: `npm run package` (produces a `.vsix`), then **Extensions: Install from VSIX…**.
+- Releases publish to the Marketplace automatically via GitHub Actions when a `v*` tag is pushed. See [`.github/workflows/publish.yml`](.github/workflows/publish.yml).
