@@ -1,7 +1,7 @@
 {
   "name": "pin-and-hide",
   "displayName": "Pin & Hide",
-  "description": "Visual Studio-style pin/unpin auto-hide for the Side Bar, Panel and Secondary Side Bar — reclaim your editor space.",
+  "description": "Stay focused on your code. Pin the parts you need and let the Side Bar, Panel and Secondary Side Bar auto-hide while you work, Visual Studio style.",
   "version": "0.1.1",
   "publisher": "mrashutoshnigam",
   "license": "MIT",
@@ -13,10 +13,24 @@
   ],
   "keywords": [
     "pin",
+    "unpin",
     "auto-hide",
+    "hide sidebar",
     "sidebar",
     "panel",
-    "layout"
+    "secondary sidebar",
+    "auxiliary bar",
+    "layout",
+    "focus mode",
+    "zen",
+    "distraction free",
+    "editor space",
+    "toggle",
+    "workbench",
+    "visual studio",
+    "collapse",
+    "show hide",
+    "productivity"
   ],
   "galleryBanner": {
     "color": "#1e1e1e",
