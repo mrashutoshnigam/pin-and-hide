@@ -2,7 +2,7 @@
   "name": "pin-and-hide",
   "displayName": "Pin & Hide",
   "description": "Stay focused on your code. Pin the parts you need and let the Side Bar, Panel and Secondary Side Bar auto-hide while you work, Visual Studio style.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "mrashutoshnigam",
   "license": "MIT",
   "engines": {
