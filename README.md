@@ -4,6 +4,16 @@
 
 Works on the Primary Side Bar, Panel and Secondary Side Bar.
 
+## See it in action
+
+Click the pin icon in the status bar to choose which parts stay pinned:
+
+![Pin icon in the status bar](images/docs/status-bar-pin.png)
+
+Tick the parts to keep pinned; unticked parts auto-hide:
+
+![Pin & Hide multi-select dialog](images/docs/pin-dialog.png)
+
 ## Usage
 
 - Each view's title bar has a pin button, like Visual Studio's tool windows: `$(pinned)` means pinned (always visible) and `$(pin)` means unpinned (auto-hides). Click it to toggle that part.
