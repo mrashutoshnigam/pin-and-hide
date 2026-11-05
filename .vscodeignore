@@ -7,3 +7,4 @@ node_modules/**
 **/*.map
 images/icon1.png
 images/icon_gpt.png
+images/docs/**
